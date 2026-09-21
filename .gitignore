@@ -1,0 +1,7 @@
+.buildozer/
+.buildozer-global/
+bin/
+__pycache__/
+*.py[cod]
+*.apk
+*.aab

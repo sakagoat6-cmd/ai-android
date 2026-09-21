@@ -1,0 +1,8 @@
+kivy
+requests
+beautifulsoup4
+duckduckgo-search
+wikipedia
+PyPDF2
+youtube-transcript-api
+pillow
