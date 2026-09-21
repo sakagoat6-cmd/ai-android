@@ -1,0 +1,36 @@
+name: Build Vibes Only APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Check Python syntax
+        run: |
+          python3 -m py_compile Vibes_Only_V11.py main.py
+
+      - name: Build with Buildozer
+        id: buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          workdir: .
+          buildozer_version: stable
+          command: buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vibes-Only-APK
+          path: ${{ steps.buildozer.outputs.filename }}
+          if-no-files-found: error
+          
